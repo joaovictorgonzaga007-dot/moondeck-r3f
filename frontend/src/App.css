@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+.canvas-container {
+  width: 100%;
+  height: 600px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .canvas-container {
+    height: 400px;
+  }
+}
