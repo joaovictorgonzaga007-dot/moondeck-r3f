@@ -3,6 +3,7 @@ import VesselSelector from '../components/VesselSelector/VesselSelector'
 import FlooringCustomizer from '../components/FlooringCustomizer/FlooringCustomizer'
 import Viewer3D from '../components/Viewer3D/Viewer3D'
 import Chatbot from '../components/Chatbot/Chatbot'
+import LeadSubmissionModal from '../components/LeadSubmissionModal/LeadSubmissionModal'
 import { flooringAPI } from '../services/api'
 
 const CustomizerPage = () => {
@@ -15,6 +16,7 @@ const CustomizerPage = () => {
   })
   const [savedConfigId, setSavedConfigId] = useState(null)
   const [saveStatus, setSaveStatus] = useState(null)
+  const [showLeadModal, setShowLeadModal] = useState(false)
 
   // Load saved configuration on mount
   useEffect(() => {
@@ -76,6 +78,9 @@ const CustomizerPage = () => {
       setSaveStatus({ type: 'success', message: 'Configuration saved successfully!' })
       setTimeout(() => setSaveStatus(null), 3000)
       console.log('Configuration saved:', response.data)
+      
+      // Show lead submission modal after successful save
+      setShowLeadModal(true)
     } catch (err) {
       console.error('Error saving configuration:', err)
       setSaveStatus({ type: 'error', message: 'Failed to save configuration' })
@@ -131,6 +136,14 @@ const CustomizerPage = () => {
 
       {/* Chatbot */}
       <Chatbot />
+
+      {/* Lead Submission Modal */}
+      <LeadSubmissionModal
+        isOpen={showLeadModal}
+        onClose={() => setShowLeadModal(false)}
+        configData={flooringConfig}
+        vesselData={selectedVessel}
+      />
     </div>
   )
 }

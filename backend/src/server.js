@@ -13,6 +13,7 @@ const vesselRoutes = require('./routes/vesselRoutes')
 const flooringRoutes = require('./routes/flooringRoutes')
 const reviewRoutes = require('./routes/reviewRoutes')
 const contactRoutes = require('./routes/contactRoutes')
+const leadRoutes = require('./routes/leadRoutes')
 
 const app = express()
 const server = http.createServer(app)
@@ -42,6 +43,7 @@ app.use('/api/vessels', vesselRoutes)
 app.use('/api/flooring', flooringRoutes)
 app.use('/api/reviews', reviewRoutes)
 app.use('/api/contact', contactRoutes)
+app.use('/api/leads', leadRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {
